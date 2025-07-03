@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: nestjs-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+    # Database service (if using Render's PostgreSQL)
+    # - type: pserv
+    #   name: nestjs-db
+    #   env: postgresql
+    #   plan: free
+    #   databaseName: nestjs_db
+    #   databaseUser: nestjs_user

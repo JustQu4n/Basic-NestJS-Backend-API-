@@ -96,4 +96,171 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# Basic-NestJS-Backend-API-
+
+# Basic NestJS Backend API
+
+## Hướng dẫn cài đặt dự án từ GitHub (Vietnamese Installation Guide)
+
+### Yêu cầu hệ thống
+- Node.js (phiên bản 18.x hoặc cao hơn)
+- npm hoặc yarn
+- Git
+- MongoDB (nếu dự án sử dụng MongoDB)
+
+### Bước 1: Clone dự án từ GitHub
+```bash
+# Clone repository về máy local
+git clone <URL_GITHUB_REPOSITORY>
+
+# Ví dụ:
+# git clone https://github.com/your-username/Basic-NestJS-Backend-API-.git
+
+# Di chuyển vào thư mục dự án
+cd Basic-NestJS-Backend-API-
+```
+
+### Bước 2: Cài đặt dependencies
+```bash
+# Sử dụng npm
+npm install
+
+# Hoặc sử dụng yarn
+yarn install
+```
+
+### Bước 3: Cấu hình môi trường
+```bash
+# Tạo file .env từ file .env.example (nếu có)
+cp .env.example .env
+
+# Hoặc tạo file .env mới
+touch .env
+```
+
+Thêm các biến môi trường cần thiết vào file `.env`:
+```env
+# Database
+MONGODB_URI=mongodb://localhost:27017/nestjs-api
+DATABASE_URL=mongodb://localhost:27017/nestjs-api
+
+# JWT
+JWT_SECRET=your_jwt_secret_key_here
+JWT_EXPIRES_IN=1d
+
+# Server
+PORT=3000
+NODE_ENV=development
+```
+
+### Bước 4: Khởi động cơ sở dữ liệu (nếu cần)
+```bash
+# Khởi động MongoDB (nếu cài đặt local)
+mongod
+
+# Hoặc sử dụng Docker
+docker run -d -p 27017:27017 --name mongodb mongo:latest
+```
+
+### Bước 5: Chạy dự án
+```bash
+# Chế độ development (tự động reload khi có thay đổi)
+npm run start:dev
+
+# Chế độ production
+npm run build
+npm run start:prod
+
+# Chế độ debug
+npm run start:debug
+```
+
+### Bước 6: Kiểm tra dự án
+Mở trình duyệt và truy cập:
+- API: `http://localhost:3000`
+- Health check: `http://localhost:3000/health` (nếu có)
+- API Documentation: `http://localhost:3000/api` (nếu có Swagger)
+
+### Các lệnh hữu ích khác
+
+#### Testing
+```bash
+# Chạy unit tests
+npm run test
+
+# Chạy e2e tests
+npm run test:e2e
+
+# Chạy test với coverage
+npm run test:cov
+
+# Chạy test ở chế độ watch
+npm run test:watch
+```
+
+#### Code Quality
+```bash
+# Format code
+npm run format
+
+# Lint code
+npm run lint
+```
+
+#### Build
+```bash
+# Build dự án cho production
+npm run build
+```
+
+### Cấu trúc dự án
+```
+src/
+├── auth/                 # Module xác thực
+│   ├── auth.controller.ts
+│   ├── auth.service.ts
+│   ├── jwt.strategy.ts
+│   └── dto/
+├── users/               # Module người dùng
+│   ├── users.controller.ts
+│   ├── users.service.ts
+│   ├── dto/
+│   └── schemas/
+├── app.module.ts        # Module chính
+├── app.controller.ts
+├── app.service.ts
+└── main.ts             # Entry point
+```
+
+### Troubleshooting (Xử lý sự cố)
+
+#### Lỗi thường gặp:
+
+1. **Port đã được sử dụng**
+   ```bash
+   Error: listen EADDRINUSE: address already in use :::3000
+   ```
+   Giải pháp: Thay đổi port trong file `.env` hoặc dừng process đang sử dụng port 3000
+
+2. **Không kết nối được database**
+   ```bash
+   MongoNetworkError: failed to connect to server
+   ```
+   Giải pháp: Kiểm tra MongoDB có đang chạy không và cấu hình MONGODB_URI đúng
+
+3. **Missing dependencies**
+   ```bash
+   Module not found
+   ```
+   Giải pháp: Chạy lại `npm install`
+
+### Các API endpoints chính
+- `POST /auth/register` - Đăng ký tài khoản
+- `POST /auth/login` - Đăng nhập
+- `GET /users` - Lấy danh sách người dùng
+- `GET /users/:id` - Lấy thông tin người dùng theo ID
+
+### Development Tips
+1. Sử dụng `npm run start:dev` để development với hot reload
+2. Kiểm tra logs trong console để debug
+3. Sử dụng Postman hoặc Thunder Client để test API
+4. Đọc documentation của NestJS tại: https://docs.nestjs.com
